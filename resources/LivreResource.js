@@ -12,9 +12,13 @@ const {
     rechercheLivre ,
     trierParCategorie,
     popularite,
-    commentaire,
-    reponse,
-    nouveauteLivre} = require('../controllers/LivreContr')
+    nouveauteLivre,
+    ajoutCommentaire,
+    ajoutReponseComs,
+    ajoutPopularite,
+    toutCommentaire,
+    toutReponseComs} = require('../controllers/LivreContr')
+
 
 
 
@@ -29,9 +33,11 @@ router.get('/livre/nouveaute' , nouveauteLivre)
 router.get('/livre/un/:id' , unLivre)
 router.get('/livre/tri-par-categorie/:categorieId' , trierParCategorie)
 router.get('/livre/populaire' , popularite)
-router.post('/livre/commentaire/:id' ,AutorisationMembre, commentaire)
-router.post('/livre/commentaire/reponse/:id' ,AutorisationMembre, reponse)
-
+router.post('/livre/commentaire/:livreId' ,AutorisationMembre, ajoutCommentaire)
+router.post('/livre/commentaire/reponse/:commentaireId' ,AutorisationMembre, ajoutReponseComs)
+router.post('/livre/popularite/ajout/:livreId' , ajoutPopularite)
+router.get('/livre/commentaires/:livreId' , toutCommentaire)
+router.get('/livre/commentaire/reponses/:commentaireId' , toutReponseComs)
 
 
 
