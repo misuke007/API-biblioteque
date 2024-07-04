@@ -1,5 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const swagger = require('./config/swagger');
 const cors = require('cors')
 const db = require('./models')
 const  fileUpload = require('express-fileupload')
@@ -45,6 +46,8 @@ app.use('/emprunt' , EmpruntResource)
 // setInterval(calculAmende ,  24*60*60*1000)
 // setInterval(resaObsolete ,  24*60*60*1000)
 
+
+swagger(app)
 
 db.sequelize.sync()
 

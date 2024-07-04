@@ -138,7 +138,6 @@ exports.login = async (req, res) => {
         status: utilisateur.statut,
       },
       "secret",
-      { expiresIn: "3m" }
     );
     return res.status(200).json({ token, badge: utilisateur.badge });
   } catch (error) {return res.status(500)}

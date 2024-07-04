@@ -18,7 +18,6 @@ exports.ajout = async (req, res, table, data, passAdmin) => {
       const token = jwt.sign(
         { id: prevData.id, email: prevData.email },
         "secret",
-        { expiresIn: "3m" }
       );
       return passAdmin
         ? res
@@ -73,8 +72,8 @@ exports.ajout = async (req, res, table, data, passAdmin) => {
   } else {
     try {
       const newData = table.build(data);
-      await newData.save();
-      return res.status(200).json({ serverSuccessMsg: ` Ajouté avec succès!` });
+      const prevdata = await newData.save();
+      return res.status(200).json({ serverSuccessMsg: ` Ajouté avec succès!` , data : prevdata });
     } catch (error) {
       return res.status(500);
     }
@@ -120,10 +119,7 @@ exports.voirTout = async (req, res, table, badge) => {
       }
     }
 
-    return res.status(200).json({
-      serverMsgSuccess: `${data.length} ${table.getTableName()}`,
-      data,
-    });
+    return res.status(200).json({data});
   } catch (error) {
     return res.status(500);
   }

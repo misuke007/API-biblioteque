@@ -1,3 +1,5 @@
+
+
 const {
   Livre,
   Categorie,
@@ -21,6 +23,7 @@ const {
 const { nouveauNom } = require("../library/optionFichier");
 const fs = require("fs");
 const constante = require("../constantes/constantes");
+const { Op } = require("sequelize");
 
 Categorie.hasOne(Livre);
 Livre.belongsTo(Categorie);
@@ -184,6 +187,11 @@ exports.popularite = async (req, res) => {
   try {
 
     let data = await Livre.findAll({ order: [["popularite", "DESC"]] });
+    const { count, rows } = await Livre.findAndCountAll({
+      where: { popularite:{[Op.gt]:20}},
+      limit: pageSize,
+      offset: (page - 1) * pageSize,
+    });
     return res.status(200).json(data);
 
   } catch (error) {return res.status(500)}
@@ -201,8 +209,8 @@ exports.ajoutCommentaire = async (req, res) => {
       LivreId,
     });
 
-    await new_commentaire.save();
-    return res.status(200).json(new_commentaire);
+    const nouveauCommentaire = await new_commentaire.save();
+    return res.status(200).json({nouveauCommentaire});
 
   } catch (error) {return res.status(500)}
 };
@@ -249,13 +257,14 @@ exports.ajoutReponseComs = async (req, res) => {
   } catch (error) {return res.status(500)}
 };
 
-exports.ajoutPopularite = (req, res) => {
+exports.ajoutNote = (req, res) => {
   
-  const { popularite } = req.body;
+  const { note } = req.body;
   const id = req.params.livreId;
+ 
 
   try {
 
-    miseJour(req, res, Livre, { popularite }, id);
+    miseJour(req, res, Livre, {popularite:note }, id);
   } catch (error) {return res.status(500)}
 };

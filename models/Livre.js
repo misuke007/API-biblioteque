@@ -39,6 +39,7 @@ module.exports = (sequelize , datatype) => {
             type : datatype.INTEGER,
             allowNull : false
         },
+        
 
         CategorieId:{
 

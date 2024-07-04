@@ -19,7 +19,3 @@ exports.supprimerCategorie = (req, res) => {
 
 exports.toutCategorie = (req, res) => voirTout(req, res, Categorie);
 
-exports.unCategorie = (req, res) => {
-  let id = req.params.id;
-  voirUn(req, res, Categorie, id);
-};
