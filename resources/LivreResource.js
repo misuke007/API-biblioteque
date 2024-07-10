@@ -115,16 +115,29 @@ router.get("/livre/nouveaute", nouveauteLivre);
  *       200:
  *         description: Succès
  *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 data:
- *                   type: array
- *                   description: Données renvoyées (le livre récupéré)
- *                   items:
- *                     type: object
- *                     example: {id: 2 , titre: HP , auteur: JK ,  date: 2024-06-01 , popularite: 100}
+ *          application/json:
+ *           schema:
+ *            type: object
+ *            properties:
+ *              data:
+ *                type: object
+ *                properties:
+ *                  id:
+ *                    type: integer
+ *                  titre:
+ *                    type: string
+ *                  auteur:
+ *                    type: string
+ *                  CategorieId:
+ *                    type: integer
+ *                  annee_publication:
+ *                    type: string
+ *                  popularite: 
+ *                    type: integer
+ *                  couverture:
+ *                    type: string
+ *                  exemplaire: 
+ *                    type: integer
  *       500:
  *         description: Erreur interne du serveur
  */

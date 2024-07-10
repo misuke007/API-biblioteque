@@ -22,7 +22,7 @@ exports.ajout = async (req, res, table, data, passAdmin) => {
       return passAdmin
         ? res
             .status(200)
-            .json({ serverMsgSuccess: `Inscription réuissie`, passAdmin })
+            .json({ serverMsgSuccess: `Nouveau admin ajouté `, passAdmin })
         : res
             .status(200)
             .json({ token, badge: prevData.badge, status: prevData.status });
